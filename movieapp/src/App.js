@@ -6,27 +6,30 @@ import Banner from "./components/Banner";
 import Albums from "./components/Albums";
 import Footer from "./components/Footer";
 import Cart from "./components/Cart";
+import CartContext from "./store/CartContext";
 
 function App() {
   const [shown, setShown] = useState(false);
   return (
-    <div className="App ">
-      <Header
-        cartShow={() => {
-          setShown(true);
-        }}
-      ></Header>
-      <Banner />
-      {shown && (
-        <Cart
+    <CartContext>
+      <div className="App ">
+        <Header
           cartShow={() => {
-            setShown(false);
+            setShown(true);
           }}
-        />
-      )}
-      <Albums />
-      <Footer />
-    </div>
+        ></Header>
+        <Banner />
+        {shown && (
+          <Cart
+            cartShow={() => {
+              setShown(false);
+            }}
+          />
+        )}
+        <Albums />
+        <Footer />
+      </div>
+    </CartContext>
   );
 }
 

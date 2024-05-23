@@ -1,42 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import ReactDOM from "react-dom";
 import { Modal } from "react-bootstrap";
+import { Cartctx } from "../store/CartContext";
 
 const Cart = (props) => {
-  const cartElements = [
-    {
-      title: "Colors",
-
-      price: 100,
-
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
-
-      quantity: 2,
-    },
-
-    {
-      title: "Black",
-
-      price: 50,
-
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
-
-      quantity: 3,
-    },
-
-    {
-      title: "Yellow",
-
-      price: 70,
-
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
-
-      quantity: 1,
-    },
-  ];
+  const { items } = useContext(Cartctx);
+  debugger;
   const ele = document.getElementById("cart");
   return ReactDOM.createPortal(
     <div
@@ -62,9 +31,10 @@ const Cart = (props) => {
               </tr>
             </thead>
 
-            {cartElements.map((item) => (
+            {items.map((item) => (
               <tbody>
                 <tr>
+                  <td>{item.id}</td>
                   <td>{item.title}</td>
                   <td>{item.price}</td>
                   <td>{item.quantity}</td>

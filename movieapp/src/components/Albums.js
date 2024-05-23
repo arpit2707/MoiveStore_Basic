@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Cartctx } from "../store/CartContext";
 
-const Albums = () => {
+const Albums = (props) => {
+  const ctx = useContext(Cartctx);
+  const { addToCart, items } = ctx;
   const productsArr = [
     {
       title: "Colors",
@@ -41,16 +44,28 @@ const Albums = () => {
 
   return (
     <div className="row">
-      {productsArr.map((item) => (
-        <div className="col-6">
-          <h3>{item.title}</h3>
-          <img src={item.imageUrl}></img>
-          <div className="d-flex">
-            <h3>{`$` + item.price}</h3>
-            <button>Add to Cart</button>
+      {productsArr &&
+        productsArr.map((item, index) => (
+          <div className="col-6">
+            <h3>{item.title}</h3>
+            <img src={item.imageUrl}></img>
+            <div className="d-flex">
+              <h3>{`$` + item.price}</h3>
+              <button
+                onClick={() => {
+                  addToCart({
+                    id: index + 1,
+                    title: item.title,
+                    image: item.imageUrl,
+                    price: item.price,
+                  });
+                }}
+              >
+                Add to Cart
+              </button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
       <button className="w-2">See the cart</button>
     </div>
   );
