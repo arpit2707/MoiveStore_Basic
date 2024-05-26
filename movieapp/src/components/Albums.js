@@ -12,6 +12,9 @@ const Albums = (props) => {
   const ctx = useContext(Cartctx);
   const { addToCart, items } = ctx;
   const [load, setLoad] = useState(false);
+  const [title, setTitle] = useState("");
+  const [txxt, setTxxt] = useState("");
+  const [dater, setDateR] = useState("");
   const intervalRef = useRef(null);
   const setLoader = (se) => {
     setLoad(se);
@@ -74,6 +77,20 @@ const Albums = (props) => {
   }, []);
   return (
     <div className="container row align-center ms-5">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          console.log(title, txxt, dater);
+        }}
+      >
+        <label>Title</label>
+        <input onChange={(e) => setTitle(e.target.value)}></input>
+        <label>Opening Text</label>
+        <input onChange={(e) => setTxxt(e.target.value)}></input>
+        <label>Release Date</label>
+        <input onChange={(e) => setDateR(e.target.value)}></input>
+        <button>ADD Movie</button>
+      </form>
       {load && (
         <div className="position-absolute z-10 w-full h-full">Loader</div>
       )}
