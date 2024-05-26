@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
 import { Cartctx } from "../store/CartContext";
 import Banner from "./Banner";
 
@@ -6,6 +6,7 @@ const Albums = (props) => {
   const ctx = useContext(Cartctx);
   const { addToCart, items } = ctx;
   const [load, setLoad] = useState(false);
+  const intervalRef = useRef(null);
   const setLoader = (se) => {
     setLoad(se);
   };
@@ -52,9 +53,14 @@ const Albums = (props) => {
       const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
       const dta = await res.json();
       setLoad(false);
+      clearInterval(intervalRef.current);
       console.log("RES", dta);
     } catch (error) {
       console.log(error);
+      throw new Error("Something Went wrong retrying");
+      intervalRef.current = setInterval(() => {
+        movies();
+      }, 5000);
     }
   };
 
