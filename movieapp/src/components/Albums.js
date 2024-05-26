@@ -1,10 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Cartctx } from "../store/CartContext";
 import Banner from "./Banner";
 
 const Albums = (props) => {
   const ctx = useContext(Cartctx);
   const { addToCart, items } = ctx;
+  const [load, setLoad] = useState(false);
+  const setLoader = (se) => {
+    setLoad(se);
+  };
+  console.log(props);
   const productsArr = [
     {
       title: "Colors",
@@ -44,8 +49,9 @@ const Albums = (props) => {
   ];
   const movies = async () => {
     try {
-      const res = await fetch("https://swapi.dve/api/films/");
+      const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
       const dta = await res.json();
+      setLoad(false);
       console.log("RES", dta);
     } catch (error) {
       console.log(error);
@@ -54,9 +60,13 @@ const Albums = (props) => {
 
   return (
     <div className="container row align-center ms-5">
+      {load && (
+        <div className="position-absolute z-10 w-full h-full">Loader</div>
+      )}
       <Banner />
       <button
         onClick={() => {
+          setLoad(true);
           movies();
         }}
       >
