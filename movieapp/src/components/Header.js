@@ -1,23 +1,31 @@
-import React, { Fragment } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 
-const Header = (props) => {
+const Header = ({ cartShow }) => {
   return (
     <div className="d-flex justify-content-between align-items-center">
-      <p className="mb-0">Home</p>
-
-      <p className="mb-0">Store</p>
-
-      <p className="mb-0">About</p>
-
-      <button
-        onClick={() => {
-          props.cartShow();
-        }}
-        className="ml-auto"
-      >
+      <ul>
+        <li>
+          <Link className="mb-0" to="/">
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link className="mb-0" to="/albums">
+            Store
+          </Link>
+        </li>
+        <li>
+          <Link className="mb-0" to="/about">
+            About
+          </Link>
+        </li>
+      </ul>
+      <button onClick={cartShow} className="ml-auto">
         Cart {0}
       </button>
     </div>
   );
 };
+
 export default Header;
