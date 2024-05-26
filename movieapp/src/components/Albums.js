@@ -1,4 +1,10 @@
-import React, { useContext, useState, useRef } from "react";
+import React, {
+  useContext,
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+} from "react";
 import { Cartctx } from "../store/CartContext";
 import Banner from "./Banner";
 
@@ -48,7 +54,7 @@ const Albums = (props) => {
         "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
     },
   ];
-  const movies = async () => {
+  const movies = useCallback(async () => {
     try {
       const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
       const dta = await res.json();
@@ -62,8 +68,10 @@ const Albums = (props) => {
         movies();
       }, 5000);
     }
-  };
-
+  }, []);
+  useEffect(() => {
+    movies();
+  }, []);
   return (
     <div className="container row align-center ms-5">
       {load && (
@@ -109,4 +117,4 @@ const Albums = (props) => {
     </div>
   );
 };
-export default Albums;
+export default React.memo(Albums);
