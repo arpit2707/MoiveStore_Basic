@@ -2,9 +2,9 @@ import React, { Fragment } from "react";
 
 const Banner = () => {
   return (
-    <Fragment className="d-flex">
+    <div className="container text-center">
       <h1>The Generics</h1>
-    </Fragment>
+    </div>
   );
 };
 export default Banner;

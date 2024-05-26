@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Cartctx } from "../store/CartContext";
+import Banner from "./Banner";
 
 const Albums = (props) => {
   const ctx = useContext(Cartctx);
@@ -43,30 +44,36 @@ const Albums = (props) => {
   ];
 
   return (
-    <div className="row">
-      {productsArr &&
-        productsArr.map((item, index) => (
-          <div className="col-6">
-            <h3>{item.title}</h3>
-            <img src={item.imageUrl}></img>
-            <div className="d-flex">
-              <h3>{`$` + item.price}</h3>
-              <button
-                onClick={() => {
-                  addToCart({
-                    id: index + 1,
-                    title: item.title,
-                    image: item.imageUrl,
-                    price: item.price,
-                  });
-                }}
-              >
-                Add to Cart
-              </button>
-            </div>
-          </div>
-        ))}
-      <button className="w-2">See the cart</button>
+    <div className="container row align-center ms-5">
+      <Banner />
+      <table className="text-center ">
+        {productsArr &&
+          productsArr.map((item, index) => (
+            // <div className="col-6">
+
+            <tr className="border-bottom mb-3 border-black border-2">
+              <th>16 , June</th>
+              <th>{item.title}</th>
+              <th>{`$` + item.price}</th>
+              <th>
+                <button
+                  className="btn-success"
+                  onClick={() => {
+                    addToCart({
+                      id: index + 1,
+                      title: item.title,
+                      image: item.imageUrl,
+                      price: item.price,
+                    });
+                  }}
+                >
+                  Add to Cart
+                </button>
+              </th>
+            </tr>
+          ))}
+        <button className="w-2">See the cart</button>
+      </table>
     </div>
   );
 };

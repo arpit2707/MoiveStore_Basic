@@ -8,41 +8,12 @@ import Footer from "./components/Footer";
 import Cart from "./components/Cart";
 import CartContext from "./store/CartContext";
 import About from "./components/About";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import Home from "./components/Home";
 function App() {
   const [shown, setShown] = useState(false);
   return (
     <CartContext>
-      <div className="App ">
-        <Router>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <Header
-                    cartShow={() => {
-                      setShown(true);
-                    }}
-                  ></Header>
-                  <Banner />
-                  {shown && (
-                    <Cart
-                      cartShow={() => {
-                        setShown(false);
-                      }}
-                    />
-                  )}
-                  <Albums />
-                </>
-              }
-            />
-            <Route path="/about" element={<About />}></Route>
-          </Routes>
-        </Router>
-        <Footer />
-      </div>
+      <Home />
     </CartContext>
   );
 }
