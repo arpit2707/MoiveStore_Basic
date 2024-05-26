@@ -42,10 +42,26 @@ const Albums = (props) => {
         "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
     },
   ];
+  const movies = async () => {
+    try {
+      const res = await fetch("https://swapi.dve/api/films/");
+      const dta = await res.json();
+      console.log("RES", dta);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="container row align-center ms-5">
       <Banner />
+      <button
+        onClick={() => {
+          movies();
+        }}
+      >
+        Fetch Movies
+      </button>
       <table className="text-center ">
         {productsArr &&
           productsArr.map((item, index) => (
