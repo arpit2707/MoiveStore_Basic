@@ -59,11 +59,19 @@ const Albums = (props) => {
   ];
   const movies = useCallback(async () => {
     try {
-      const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+      const res = await fetch(
+        "https://movie-ag-default-rtdb.firebaseio.com/movies.json",
+        {
+          method: "POST",
+          body: JSON.stringify({ title: title, text: txxt, date: dater }),
+          headers: { "Content-Type": "application/json" },
+        }
+      );
       const dta = await res.json();
       setLoad(false);
+      console.log(res, dta);
       clearInterval(intervalRef.current);
-      console.log("RES", dta);
+      // console.log("RES", dta);
     } catch (error) {
       console.log(error);
       throw new Error("Something Went wrong retrying");
@@ -83,7 +91,7 @@ const Albums = (props) => {
           console.log(title, txxt, dater);
         }}
       >
-        <label>Title</label>
+        <label className="mb-2 ">Title</label>
         <input onChange={(e) => setTitle(e.target.value)}></input>
         <label>Opening Text</label>
         <input onChange={(e) => setTxxt(e.target.value)}></input>
